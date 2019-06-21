@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using FilePaths.Extensions;
+﻿using FilePaths.FilesPathsManagers;
 using FilePaths.Helpers;
 using FilePaths.Models;
+using System;
+using System.IO;
+using System.Text;
 
 namespace FilePaths
 {
@@ -26,11 +24,11 @@ namespace FilePaths
                 return;
             }
 
-            _inputData.StartDirectory = args[0];
-            var outList = new List<string>();
 
-
-            FileInfoList(_inputData.StartDirectory, string.Empty, ref outList );
+            
+            var x = new FIlesInfo1(_inputData.StartDirectory);
+            var outList = x.FileInfoList();
+         
 
             using (StreamWriter sw = new StreamWriter(_inputData.ResultFilePath, false, Encoding.Default))
             {
@@ -43,24 +41,6 @@ namespace FilePaths
             Console.ReadKey();
         }
 
-        private static void FileInfoList(string dirName, string path, ref List<string> fileList )
-        {
-
-            string[] dirs = Directory.GetDirectories(dirName);
-            string[] files = Directory.GetFiles(dirName);
-
-            var tail = files.Select(s => s.Substring(_inputData.StartDirectory.Length+1)).ToList();
-
-            fileList.AppendList(tail);
-
-            if (dirs.Any())
-            {
-                foreach (var dir in dirs)
-                {
-                    FileInfoList(dir, dir, ref fileList);
-                }
-            }
         
-        }
     }
 }

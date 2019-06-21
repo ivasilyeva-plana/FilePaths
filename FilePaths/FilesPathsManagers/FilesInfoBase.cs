@@ -1,24 +1,27 @@
 ﻿using FilePaths.Extensions;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FilePaths.FilesPathsManagers
 {
-    internal class FilesInfoBase
+    internal abstract class FilesInfoBase : IFilesInfo
     {
-        internal readonly string StartDirectory;
+        protected string StartDirectory;
+        private readonly List<string>  _fileList = new List<string>();
 
-        public FilesInfoBase(string startDirectory)
+        protected FilesInfoBase(string startDirectory)
         {
             StartDirectory = startDirectory;
         }
 
+        public List<string> FileInfoList()
+        {
+            FileInfoList(StartDirectory, string.Empty);
+            return _fileList;
+        }
 
-        public void FileInfoList(string dirName, string path, ref List<string> fileList )
+        private void FileInfoList(string dirName, string path)
         {
 
             string[] dirs = Directory.GetDirectories(dirName);
@@ -26,16 +29,21 @@ namespace FilePaths.FilesPathsManagers
 
             var tail = files.Select(s => s.Substring(StartDirectory.Length+1)).ToList();
 
-            fileList.AppendList(tail);
+            tail = PathMaker(tail);
+
+            _fileList.AppendList(tail);
 
             if (dirs.Any())
             {
                 foreach (var dir in dirs)
                 {
-                    FileInfoList(dir, dir, ref fileList);
+                    FileInfoList(dir, dir);
                 }
             }
         
         }
+
+        protected abstract List<string> PathMaker(List<string> list);
+
     }
 }

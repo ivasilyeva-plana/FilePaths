@@ -8,6 +8,6 @@ namespace FilePaths.FilesPathsManagers
 {
     internal interface IFilesInfo
     {
-
+        List<string> FileInfoList();
     }
 }

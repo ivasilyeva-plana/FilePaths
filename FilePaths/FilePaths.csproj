@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="FilesPathsManagers\FIlesInfo1.cs" />
     <Compile Include="FilesPathsManagers\FilesInfoBase.cs" />
     <Compile Include="FilesPathsManagers\IFilesInfo.cs" />
     <Compile Include="Helpers\InputAnalyzer.cs" />
