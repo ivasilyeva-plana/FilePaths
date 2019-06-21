@@ -22,7 +22,7 @@ namespace FilePaths
             catch(Exception ex)
             {
                 Console.WriteLine(ex.Message);
-               // Console.ReadKey();
+                Console.ReadKey();
                 return;
             }
 

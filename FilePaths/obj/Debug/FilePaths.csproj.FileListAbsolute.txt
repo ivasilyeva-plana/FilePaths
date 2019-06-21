@@ -1,0 +1,7 @@
+D:\repos\FilePaths\FilePaths\bin\Debug\FilePaths.exe.config
+D:\repos\FilePaths\FilePaths\bin\Debug\FilePaths.exe
+D:\repos\FilePaths\FilePaths\bin\Debug\FilePaths.pdb
+D:\repos\FilePaths\FilePaths\obj\Debug\FilePaths.csprojAssemblyReference.cache
+D:\repos\FilePaths\FilePaths\obj\Debug\FilePaths.csproj.CoreCompileInputs.cache
+D:\repos\FilePaths\FilePaths\obj\Debug\FilePaths.exe
+D:\repos\FilePaths\FilePaths\obj\Debug\FilePaths.pdb
