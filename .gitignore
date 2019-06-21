@@ -6,3 +6,4 @@
 /.vs/FilePaths/v16
 /FilePaths/bin
 /FilePaths/obj
+*.suo
