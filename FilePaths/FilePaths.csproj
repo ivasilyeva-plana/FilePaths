@@ -44,12 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="FilesEnumerator\FilesEnumerator.cs" />
+    <Compile Include="FilesEnumerator\IFilesEnumerator.cs" />
     <Compile Include="FilesPathsManagers\FIlesInfo1.cs" />
     <Compile Include="FilesPathsManagers\FilesInfoBase.cs" />
     <Compile Include="FilesPathsManagers\IFilesInfo.cs" />
     <Compile Include="Helpers\InputAnalyzer.cs" />
-    <Compile Include="Models\PathAction.cs" />
+    <Compile Include="Models\Actions.cs" />
     <Compile Include="Models\InputData.cs" />
+    <Compile Include="Operations\FilesQueryFactory.cs" />
+    <Compile Include="Operations\GetAllFilesQuery.cs" />
+    <Compile Include="Operations\IFilesQuery.cs" />
+    <Compile Include="Operations\IFilesQueryFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,12 +7,8 @@ namespace FilePaths.Helpers
 {
     internal class InputAnalyzer
     {
-
         private const string DefFilePath = "result.txt";
-        private readonly string[] _actions = {"all", "cs", "reversed1", "reversed2"}; 
         private readonly string[] _args;
-
-
 
         public InputAnalyzer(string[] args)
         {
@@ -29,8 +25,8 @@ namespace FilePaths.Helpers
 
             return new InputData
             {
-                StartDirectory =_args[0],
-                ActionValue = (PathAction)Array.IndexOf(_actions, _args[1]),
+                StartDirectory = _args[0],
+                ActionValue = (Actions)Enum.Parse(typeof(Actions), _args[1], true),
                 ResultFilePath = _args.Length==3 ? _args[2] : DefFilePath
             };
         }
@@ -38,6 +34,8 @@ namespace FilePaths.Helpers
         private string GetValidateMessage()
         {
             var message = string.Empty;
+            var availableActions = Enum.GetNames(typeof(Actions))
+                .Select(a => a.ToLower()).ToArray();
             if (_args.Length >= 2 && _args.Length <= 3)
             {
                 if (!Directory.Exists(_args[0]))
@@ -45,9 +43,10 @@ namespace FilePaths.Helpers
                     message = $"There isn't such directory: {_args[0]}";
                 }
 
-                if (_actions.All(i => i != _args[1]))
+                if (!Enum.TryParse<Actions>(_args[1],true, out var action))
                 {
-                    message = $"{_args[1]} - invalid action parameter. Action list: {string.Join(", ",_actions)}";
+                   
+                    message = $"{_args[1]} - invalid action parameter. Action list: {string.Join(", ", availableActions)}";
                 }
 
                 if (_args.Length > 2)
@@ -60,7 +59,7 @@ namespace FilePaths.Helpers
             {
                 message = $"Command line arguments:{Environment.NewLine}" +
                            $"  directory  -  start directory;{Environment.NewLine}" +
-                           $"  action  -  action name. Action name list: {string.Join(", ",_actions)};{Environment.NewLine}" +
+                           $"  action  -  action name. Action name list: {string.Join(", ", availableActions)};{Environment.NewLine}" +
                            $"  file path  -  path to the result file (default value results.txt);";
 
             }

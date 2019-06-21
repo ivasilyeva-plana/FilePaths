@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FilePaths.Models
 {
-    internal enum PathAction
+    internal enum Actions
     {
-        All, 
+        All,
         Cs,
         Reversed1,
         Reversed2

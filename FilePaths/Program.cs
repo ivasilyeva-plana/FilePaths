@@ -4,6 +4,7 @@ using FilePaths.Models;
 using System;
 using System.IO;
 using System.Text;
+using FilePaths.Operations;
 
 namespace FilePaths
 {
@@ -26,18 +27,23 @@ namespace FilePaths
 
 
             
-            var x = new FIlesInfo1(_inputData.StartDirectory);
-            var outList = x.FileInfoList();
-         
+            //var x = new FIlesInfo1(_inputData.StartDirectory);
+            //var outList = x.FileInfoList();
 
-            using (StreamWriter sw = new StreamWriter(_inputData.ResultFilePath, false, Encoding.Default))
+            var factory = new FilesQueryFactory(new FilesEnumerator.FilesEnumerator());
+            var query = factory.GetQuery(_inputData.ActionValue);
+            var outList = query.ExecuteQuery(_inputData.StartDirectory);
+
+            using (var sw = new StreamWriter(_inputData.ResultFilePath, false))
             {
                 foreach (var i in outList)
                 {
                     sw.WriteLine(i);
                 }
             }
-            
+
+            Console.WriteLine($"Result is stored to: {_inputData.ResultFilePath}");
+            Console.WriteLine("Press any key to exit");
             Console.ReadKey();
         }
 
