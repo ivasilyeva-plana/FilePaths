@@ -6,14 +6,14 @@ namespace FilePaths.FilesEnumerator
 {
     internal class FilesEnumerator : IFilesEnumerator
     {
-        public IEnumerable<string> GetFilesList(string startingFolder)
-            => GetFilesFromSubFolders(startingFolder)
+        public IEnumerable<string> GetFilesList(string startingFolder, string searchPattern = null)
+            => GetFilesFromSubFolders(startingFolder, searchPattern)
                 .Select(s => s.Substring(startingFolder.Length + 1));
 
-        private List<string> GetFilesFromSubFolders(string folderName)
+        private List<string> GetFilesFromSubFolders(string folderName, string searchPattern)
         {
             var folderNames = Directory.GetDirectories(folderName);
-            var fileNames = Directory.GetFiles(folderName).ToList();
+            var fileNames = Directory.GetFiles(folderName, searchPattern).ToList();
 
             fileNames.AddRange(fileNames);
 
@@ -21,7 +21,7 @@ namespace FilePaths.FilesEnumerator
 
             foreach (var folder in folderNames)
             {
-                fileNames.AddRange(GetFilesFromSubFolders(folder));
+                fileNames.AddRange(GetFilesFromSubFolders(folder, searchPattern));
             }
 
             return fileNames;

@@ -19,6 +19,8 @@ namespace FilePaths.Operations
             {
                 case Actions.All:
                     return new GetAllFilesQuery(_filesEnumerator);
+                case Actions.Cs:
+                    return new GetCsFilesQuery(_filesEnumerator);
                 default:
                     throw new Exception("Action is not recognized");
             }

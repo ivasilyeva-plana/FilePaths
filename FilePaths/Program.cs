@@ -1,22 +1,19 @@
-﻿using FilePaths.FilesPathsManagers;
-using FilePaths.Helpers;
-using FilePaths.Models;
-using System;
-using System.IO;
-using System.Text;
+﻿using FilePaths.Models;
 using FilePaths.Operations;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace FilePaths
 {
     class Program
     {
-        static InputData _inputData;
         static void Main(string[] args)
         {
-            var inputDataAnalyzer = new InputAnalyzer(args);
+            InputData inputData;
             try
             {
-                _inputData = inputDataAnalyzer.GetInputDataValues();
+                inputData = InputData.Parse(args);
             }
             catch(Exception ex)
             {
@@ -25,28 +22,26 @@ namespace FilePaths
                 return;
             }
 
-
-            
-            //var x = new FIlesInfo1(_inputData.StartDirectory);
-            //var outList = x.FileInfoList();
-
             var factory = new FilesQueryFactory(new FilesEnumerator.FilesEnumerator());
-            var query = factory.GetQuery(_inputData.ActionValue);
-            var outList = query.ExecuteQuery(_inputData.StartDirectory);
+            var query = factory.GetQuery(inputData.ActionValue);
+            var outList = query.ExecuteQuery(inputData.StartDirectory);
 
-            using (var sw = new StreamWriter(_inputData.ResultFilePath, false))
-            {
-                foreach (var i in outList)
-                {
-                    sw.WriteLine(i);
-                }
-            }
+            WriteToFile(inputData.ResultFilePath, outList);
 
-            Console.WriteLine($"Result is stored to: {_inputData.ResultFilePath}");
+            Console.WriteLine($"Result is stored to: {inputData.ResultFilePath}");
             Console.WriteLine("Press any key to exit");
             Console.ReadKey();
         }
 
-        
+        private static void WriteToFile(string fileName, IEnumerable<string> list)
+        {
+            using (var sw = new StreamWriter(fileName, false))
+            {
+                foreach (var i in list)
+                {
+                    sw.WriteLine(i);
+                }
+            }
+        }
     }
 }
