@@ -21,6 +21,10 @@ namespace FilePaths.Operations
                     return new GetAllFilesQuery(_filesEnumerator);
                 case Actions.Cs:
                     return new GetCsFilesQuery(_filesEnumerator);
+                case Actions.Reversed1:
+                    return new GetReversed1FilesQuery(_filesEnumerator);
+                case Actions.Reversed2:
+                    return new GetReversed2FilesQuery(_filesEnumerator);
                 default:
                     throw new Exception("Action is not recognized");
             }

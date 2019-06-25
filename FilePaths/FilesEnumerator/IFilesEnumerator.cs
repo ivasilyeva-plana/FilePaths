@@ -4,6 +4,6 @@ namespace FilePaths.FilesEnumerator
 {
     internal interface IFilesEnumerator
     {
-        IEnumerable<string> GetFilesList(string startingFolder, string searchPattern = null);
+        IEnumerable<string> GetFilesList(string startingFolder, string searchPattern = "*");
     }
 }

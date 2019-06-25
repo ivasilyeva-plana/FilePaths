@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="FilesEnumerator\FilesEnumerator.cs" />
     <Compile Include="FilesEnumerator\IFilesEnumerator.cs" />
     <Compile Include="Models\Actions.cs" />
@@ -51,6 +50,8 @@
     <Compile Include="Operations\FilesQueryFactory.cs" />
     <Compile Include="Operations\GetAllFilesQuery.cs" />
     <Compile Include="Operations\GetCsFilesQuery.cs" />
+    <Compile Include="Operations\GetReversed1FilesQuery.cs" />
+    <Compile Include="Operations\GetReversed2FilesQuery.cs" />
     <Compile Include="Operations\IFilesQuery.cs" />
     <Compile Include="Operations\IFilesQueryFactory.cs" />
     <Compile Include="Program.cs" />
@@ -58,6 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
