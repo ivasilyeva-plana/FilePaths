@@ -16,9 +16,9 @@ namespace FilePaths.Operations
             _filesEnumerator = filesEnumerator;
         }
 
-        public IEnumerable<string> ExecuteQuery(string startingFolder)
-            =>_filesEnumerator.GetFilesList(startingFolder)
-                .Select(f => string.Join(@"\", f.Split('\\').Reverse()));
+        public async Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder)
+            => await Task.Run(()=>_filesEnumerator.GetFilesList(startingFolder)
+                .Select(f => string.Join(@"\", f.Split('\\').Reverse())));
         
         
     }

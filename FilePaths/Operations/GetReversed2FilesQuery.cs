@@ -16,10 +16,9 @@ namespace FilePaths.Operations
             _filesEnumerator = filesEnumerator;
         }
 
-        public IEnumerable<string> ExecuteQuery(string startingFolder)
-        {
-            return _filesEnumerator.GetFilesList(startingFolder)
-                           .Select(f => new string(f.ToCharArray().Reverse().ToArray()));
-        }
+        public async Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder)
+            => await Task.Run(()=> _filesEnumerator.GetFilesList(startingFolder)
+                           .Select(f => new string(f.ToCharArray().Reverse().ToArray())));
+        
     }
 }

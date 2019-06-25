@@ -3,12 +3,13 @@ using FilePaths.Operations;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace FilePaths
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             InputData inputData;
             try
@@ -24,7 +25,7 @@ namespace FilePaths
 
             var factory = new FilesQueryFactory(new FilesEnumerator.FilesEnumerator());
             var query = factory.GetQuery(inputData.ActionValue);
-            var outList = query.ExecuteQuery(inputData.StartDirectory);
+            var outList = await query.ExecuteQueryAsync(inputData.StartDirectory);
 
             WriteToFile(inputData.ResultFilePath, outList);
 

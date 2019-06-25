@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FilePaths.Operations
 {
     public interface IFilesQuery
     {
-        IEnumerable<string> ExecuteQuery(string startingFolder);
+        Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder);
     }
 }
