@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FilePaths.Operations
@@ -16,9 +17,10 @@ namespace FilePaths.Operations
             _filesEnumerator = filesEnumerator;
         }
 
-        public async Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder)
-            => await Task.Run(()=> _filesEnumerator.GetFilesList(startingFolder)
-                           .Select(f => new string(f.ToCharArray().Reverse().ToArray())));
-        
+        public async Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder,  CancellationToken ct)
+        {
+            var list = await _filesEnumerator.GetFilesListAsync(ct, startingFolder); 
+            return list.Select(f => new string(f.ToCharArray().Reverse().ToArray()));
+        }
     }
 }

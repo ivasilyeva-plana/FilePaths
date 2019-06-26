@@ -2,6 +2,7 @@
 using FilePaths.FilesEnumerator;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace FilePaths.Operations
 {
@@ -14,7 +15,7 @@ namespace FilePaths.Operations
             _filesEnumerator = filesEnumerator;
         }
 
-        public async Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder)
-            => await Task.Run(()=>_filesEnumerator.GetFilesList(startingFolder));
+        public async Task<IEnumerable<string>> ExecuteQueryAsync(string startingFolder,  CancellationToken ct)
+            => await _filesEnumerator.GetFilesListAsync(ct, startingFolder);
     }
 }
