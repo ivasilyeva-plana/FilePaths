@@ -22,21 +22,25 @@ namespace FilePaths.FilesEnumerator
             var folderNames = Directory.GetDirectories(folderName);
             var fileNames = Directory.GetFiles(folderName, searchPattern).ToList();
 
+            if (ct.IsCancellationRequested)
+            {
+                Console.WriteLine("Operation is canceled.");
+                return fileNames;
+            }
+
             fileNames.AddRange(fileNames);
 
             if (folderNames == null || !folderNames.Any()) return fileNames;
 
             foreach (var folder in folderNames)
             {
+                
+                if (ct.IsCancellationRequested) break;
                 fileNames.AddRange(GetFilesFromSubFolders(folder, searchPattern, ct));
-                if (ct.IsCancellationRequested)
-                {
-                    Console.WriteLine("Operation is canceled.");
-                    break;
-                }
             }
 
             return fileNames;
         }
+
     }
 }

@@ -42,7 +42,7 @@ namespace FilePaths
             
      
             Console.Read();
-            Console.ReadKey();
+         
             
         }
 
