@@ -21,7 +21,7 @@ namespace FilePaths.Models
 
         public static InputData Parse(string[] args)
         {
-            Validate(args); 
+            Validate(args);
 
             return new InputData(args[0],
                 (Actions) Enum.Parse(typeof(Actions), args[1], true),

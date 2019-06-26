@@ -46,18 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FilesEnumerator\FilesEnumerator.cs" />
+    <Compile Include="FilesEnumerator\RecursiveFilesEnumerator.cs" />
     <Compile Include="FilesEnumerator\IFilesEnumerator.cs" />
     <Compile Include="Models\Actions.cs" />
     <Compile Include="Models\InputData.cs" />
     <Compile Include="Ninject\NinjectRegistrations.cs" />
-    <Compile Include="Operations\FilesQueryFactory.cs" />
     <Compile Include="Operations\GetAllFilesQuery.cs" />
     <Compile Include="Operations\GetCsFilesQuery.cs" />
     <Compile Include="Operations\GetReversed1FilesQuery.cs" />
     <Compile Include="Operations\GetReversed2FilesQuery.cs" />
     <Compile Include="Operations\IFilesQuery.cs" />
-    <Compile Include="Operations\IFilesQueryFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

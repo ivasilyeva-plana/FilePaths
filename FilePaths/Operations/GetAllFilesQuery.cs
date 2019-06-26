@@ -1,8 +1,7 @@
-﻿using System;
-using FilePaths.FilesEnumerator;
+﻿using FilePaths.FilesEnumerator;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FilePaths.Operations
 {

@@ -10,15 +10,11 @@ namespace FilePaths.Ninject
     {
         private readonly Actions _action;
 
-        public NinjectRegistrations(Actions action)
-        {
-            _action = action;
-        }
+        public NinjectRegistrations(Actions action) => _action = action;
 
         public override void Load()
         {
-            Bind<IFilesEnumerator>().To<FilesEnumerator.FilesEnumerator>();
-            Bind<IFilesQueryFactory>().To<FilesQueryFactory>();
+            Bind<IFilesEnumerator>().To<RecursiveFilesEnumerator>();
 
             switch (_action)
             {
