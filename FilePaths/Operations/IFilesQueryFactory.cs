@@ -4,6 +4,6 @@ namespace FilePaths.Operations
 {
     internal interface IFilesQueryFactory
     {
-        IFilesQuery GetQuery(Actions action);
+        IFilesQuery GetQuery();
     }
 }

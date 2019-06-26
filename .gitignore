@@ -7,3 +7,4 @@
 /FilePaths/bin
 /FilePaths/obj
 *.suo
+/packages

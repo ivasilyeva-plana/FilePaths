@@ -1,33 +1,14 @@
-﻿using System;
-using FilePaths.FilesEnumerator;
-using FilePaths.Models;
+﻿using FilePaths.Models;
+using Ninject;
 
 namespace FilePaths.Operations
 {
     internal class FilesQueryFactory : IFilesQueryFactory
     {
-        private readonly IFilesEnumerator _filesEnumerator;
+        private readonly IKernel _kernel;
 
-        public FilesQueryFactory(IFilesEnumerator filesEnumerator)
-        {
-            _filesEnumerator = filesEnumerator;
-        }
+        public FilesQueryFactory(IKernel kernel) => _kernel = kernel;
 
-        public IFilesQuery GetQuery(Actions action)
-        {
-            switch (action)
-            {
-                case Actions.All:
-                    return new GetAllFilesQuery(_filesEnumerator);
-                case Actions.Cs:
-                    return new GetCsFilesQuery(_filesEnumerator);
-                case Actions.Reversed1:
-                    return new GetReversed1FilesQuery(_filesEnumerator);
-                case Actions.Reversed2:
-                    return new GetReversed2FilesQuery(_filesEnumerator);
-                default:
-                    throw new Exception("Action is not recognized");
-            }
-        }
+        public IFilesQuery GetQuery() =>_kernel.Get<IFilesQuery>();
     }
 }

@@ -1,5 +1,8 @@
 ﻿using FilePaths.Models;
+using FilePaths.Ninject;
 using FilePaths.Operations;
+using Ninject;
+using Ninject.Modules;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,10 +27,13 @@ namespace FilePaths
                 return;
             }
 
+            NinjectModule registrations = new NinjectRegistrations(inputData.ActionValue);
+            var kernel = new StandardKernel(registrations);
+           
 
             var cts = new CancellationTokenSource();
             
-            _ = StartOperationAsync(inputData,  cts.Token);
+            _ = StartOperationAsync(inputData,  cts.Token, kernel);
 
             const string exit = "q";
             Console.WriteLine($"Enter '{exit}' to cancel operation");
@@ -38,12 +44,8 @@ namespace FilePaths
             {
                 cts.Cancel();
             }
-         
-            
-     
+
             Console.Read();
-         
-            
         }
 
         private static void WriteToFile(string fileName, IEnumerable<string> list)
@@ -57,17 +59,15 @@ namespace FilePaths
             }
         }
 
-        private static async Task StartOperationAsync(InputData inputData, CancellationToken ct)
+        private static async Task StartOperationAsync(InputData inputData, CancellationToken ct, IKernel kernel)
         {
-            var factory = new FilesQueryFactory(new FilesEnumerator.FilesEnumerator());
-            var query = factory.GetQuery(inputData.ActionValue);
-
+            var factory = kernel.Get<IFilesQueryFactory>();
+            var query = factory.GetQuery();
             var outList = await query.ExecuteQueryAsync(inputData.StartDirectory, ct);
             
             WriteToFile(inputData.ResultFilePath, outList);
             
             Console.WriteLine($"Result is stored to: {inputData.ResultFilePath}");
-   
         }
     }
 }
