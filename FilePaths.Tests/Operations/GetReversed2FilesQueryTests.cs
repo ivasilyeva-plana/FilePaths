@@ -10,12 +10,12 @@ using Moq;
 namespace FilePaths.Tests.Operations
 {
     [TestClass]
-    public class GetCsFilesQueryTests
+    public class GetReversed2FilesQueryTests
     {
         private readonly List<string> _files = new List<string>
-            { "third.cs", "forth.cs" };
+            { @"Directory1\first.file", @"Directory2\second.cs" };
         private readonly List<string> _expectedResult = new List<string>
-            { "third.cs /", "forth.cs /" };
+            { @"elif.tsrif\1yrotceriD", @"sc.dnoces\2yrotceriD"};
         
         [TestMethod]
         public async Task ExecuteQueryAsyncTest()
@@ -27,12 +27,12 @@ namespace FilePaths.Tests.Operations
 
             const string folder = "folder";
             var ct = new CancellationToken();
-            var query = new GetCsFilesQuery(fileEnumeratorMock.Object);
+            var query = new GetReversed2FilesQuery(fileEnumeratorMock.Object);
             var res = (await query.ExecuteQueryAsync(folder, ct)).ToList();
 
             fileEnumeratorMock.Verify(
                 m => m.GetFilesListAsync(It.Is<CancellationToken>(x => x == ct), It.Is<string>(x => x == folder),
-                    It.Is<string>(x => x == "*.cs")), Times.Once);
+                    It.Is<string>(x => x == "*")), Times.Once);
             CollectionAssert.AreEqual(_expectedResult, res);
         }
     }

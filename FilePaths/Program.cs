@@ -34,36 +34,48 @@ namespace FilePaths
 
             var cts = new CancellationTokenSource();
             
-            _ = StartOperationAsync(inputData,  cts.Token, kernel);
+            var task = StartOperationAsync(inputData,  cts.Token, kernel);
 
             Console.WriteLine($"Enter '{Exit}' to cancel operation");
 
-            var command = Console.ReadLine();
-
-            if (command != null && command.Equals(Exit))
+            while (!task.IsCompleted)
             {
-                Console.WriteLine("Operation is canceled.");
-                cts.Cancel();
-                Console.Read();
+                var command = Console.ReadLine();
+
+                if (command != null && command.Equals(Exit))
+                {
+                    Console.WriteLine("Operation is canceled.");
+                    cts.Cancel();
+                    Console.Read();
+                }
             }
         }
 
-        private static async Task WriteToFile(string fileName, IEnumerable<string> list)
+        private static async Task<bool> WriteToFile(string fileName, IEnumerable<string> list)
         {
-            using (var sw = new StreamWriter(fileName, false))
+            try
             {
-                await sw.WriteAsync(string.Join(Environment.NewLine, list.ToArray()));
+                using (var sw = new StreamWriter(fileName, false))
+                {
+                    await sw.WriteAsync(string.Join(Environment.NewLine, list.ToArray()));
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Cannot create a file to store result data:");
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            return true;
         }
 
         private static async Task StartOperationAsync(InputData inputData, CancellationToken ct, IKernel kernel)
         {
             var query = kernel.Get<IFilesQuery>();
             var outList = await query.ExecuteQueryAsync(inputData.StartDirectory, ct);
-            
-            await WriteToFile(inputData.ResultFilePath, outList);
-            
-            Console.WriteLine($"Result is stored to: {inputData.ResultFilePath}");
+
+            if (await WriteToFile(inputData.ResultFilePath, outList))
+                Console.WriteLine($"Result is stored to: {inputData.ResultFilePath}");
         }
     }
 }

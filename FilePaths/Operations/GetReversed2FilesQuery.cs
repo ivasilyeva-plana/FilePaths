@@ -1,14 +1,12 @@
 ﻿using FilePaths.FilesEnumerator;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FilePaths.Operations
 {
-    internal class GetReversed2FilesQuery : IFilesQuery
+    public class GetReversed2FilesQuery : IFilesQuery
     {
         private readonly IFilesEnumerator _filesEnumerator;
 

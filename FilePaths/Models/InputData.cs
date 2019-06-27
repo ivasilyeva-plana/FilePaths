@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FilePaths.Models
 {
-    internal class InputData
+    public class InputData
     {
         private const string DefaultResultFilePath = "result.txt";
 
@@ -19,7 +19,7 @@ namespace FilePaths.Models
             ResultFilePath = resultFilePath;
         }
 
-        public static InputData Parse(string[] args)
+        public static InputData Parse(params string[] args)
         {
             Validate(args);
 
@@ -46,9 +46,6 @@ namespace FilePaths.Models
             if (!Enum.TryParse<Actions>(args[1], true, out _))
                 throw new Exception(
                     $"{args[1]} - invalid action parameter. Action list: {string.Join(", ", availableActions)}");
-
-            if (args.Length > 2)
-                new FileInfo(args[2]).Create();
         }
     }
 }

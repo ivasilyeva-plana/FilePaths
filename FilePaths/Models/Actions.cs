@@ -1,6 +1,6 @@
 ﻿namespace FilePaths.Models
 {
-    internal enum Actions
+    public enum Actions
     {
         All,
         Cs,

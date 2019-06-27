@@ -6,7 +6,7 @@ using System;
 
 namespace FilePaths.Ninject
 {
-    internal class NinjectRegistrations : NinjectModule
+    public class NinjectRegistrations : NinjectModule
     {
         private readonly Actions _action;
 
