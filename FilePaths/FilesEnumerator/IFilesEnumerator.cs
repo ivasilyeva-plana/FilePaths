@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace FilePaths.FilesEnumerator
 {
-    internal interface IFilesEnumerator
+    public interface IFilesEnumerator
     {
         Task <IEnumerable<string>> GetFilesListAsync(CancellationToken ct, string startingFolder, string searchPattern = "*");
     }

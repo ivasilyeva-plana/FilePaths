@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace FilePaths.Operations
 {
-    internal class GetAllFilesQuery : IFilesQuery
+    public class GetAllFilesQuery : IFilesQuery
     {
         private readonly IFilesEnumerator _filesEnumerator;
 

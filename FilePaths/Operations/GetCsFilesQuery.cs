@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FilePaths.Operations
 {
-    internal class GetCsFilesQuery : IFilesQuery
+    public class GetCsFilesQuery : IFilesQuery
     {
         private readonly IFilesEnumerator _filesEnumerator;
 

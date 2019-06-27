@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="FilesEnumerator\RecursiveFilesEnumerator.cs" />
     <Compile Include="FilesEnumerator\IFilesEnumerator.cs" />
+    <Compile Include="FilesEnumerator\StraightFilesEnumerator.cs" />
     <Compile Include="Models\Actions.cs" />
     <Compile Include="Models\InputData.cs" />
     <Compile Include="Ninject\NinjectRegistrations.cs" />
@@ -63,8 +64,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

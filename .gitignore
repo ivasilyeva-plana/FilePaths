@@ -8,3 +8,6 @@
 /FilePaths/obj
 *.suo
 /packages
+/FilePaths.Tests/obj
+*.user
+/FilePaths.Tests/bin

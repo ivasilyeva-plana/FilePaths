@@ -30,7 +30,7 @@ namespace FilePaths
             }
 
             var registrations = new NinjectRegistrations(inputData.ActionValue);
-            var kernel = new StandardKernel(registrations);
+            var kernel = new StandardKernel(registrations); 
 
             var cts = new CancellationTokenSource();
             

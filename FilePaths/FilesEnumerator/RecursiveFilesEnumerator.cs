@@ -8,7 +8,7 @@ namespace FilePaths.FilesEnumerator
 {
     internal class RecursiveFilesEnumerator : IFilesEnumerator
     {
-        public Task<IEnumerable<string>> GetFilesListAsync(CancellationToken ct, string startingFolder, string searchPattern = null)
+        public Task<IEnumerable<string>> GetFilesListAsync(CancellationToken ct, string startingFolder, string searchPattern = "*")
             => Task.Run(() => GetFilesFromSubFolders(startingFolder, searchPattern, ct)
                 .Select(s => s.Substring(startingFolder.Length + 1)));
 
